@@ -47,4 +47,11 @@
             android:background="@android:color/transparent">
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+
 </android.support.v4.widget.DrawerLayout>

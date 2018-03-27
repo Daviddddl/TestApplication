@@ -1,9 +1,14 @@
 package com.example.didonglin.testapplication;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.didonglin.testapplication.fragment.ContentFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,16 +145,74 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        boolean res = false;
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
+            case R.id.action_settings:{
+                res = actionCamera();
+                break;
+            }
+            case R.id.take_photo:{
+
+                res = actionAlbum();
+                break;
+            }
             default:
-                return super.onOptionsItemSelected(item);
+                res = super.onOptionsItemSelected(item);
         }
+        return res;
     }
+
+    public boolean actionCamera(){
+        Toast.makeText(this,"点击了拍照..",Toast.LENGTH_SHORT).show();
+
+        final int CAMERA = 1;
+
+        ImageView picture = (ImageView)findViewById(R.id.picture);
+        Uri imageUri;
+
+        setContentView(R.layout.activity_main);
+        //创建file对象，用于存储拍照后的图片；
+        File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+
+        try {
+            if (outputImage.exists()) {
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (Build.VERSION.SDK_INT >= 24) {
+            imageUri = FileProvider.getUriForFile(MainActivity.this,
+                    "com.example.didonglin.testapplication", outputImage);
+        } else {
+            imageUri = Uri.fromFile(outputImage);
+        }
+
+        //启动相机程序
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, CAMERA);
+        return true;
+    }
+
+    public boolean actionAlbum(){
+        //Toast.makeText(this,"点击了相册..",Toast.LENGTH_SHORT).show();
+
+        final int ALBUM = 2;
+
+        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("image/*");
+        startActivityForResult(intent, ALBUM);
+
+        return true;
+    }
+
 
     private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
         this.res = this.res == R.drawable.content_music ? R.drawable.content_films : R.drawable.content_music;

@@ -4,7 +4,13 @@
       tools:context="yalantis.com.sidemenu.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:title="@string/camera"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/take_photo"
+        android:title="@string/album"
         android:orderInCategory="100"
         app:showAsAction="never"/>
 </menu>
