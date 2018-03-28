@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean res = false;
@@ -150,11 +151,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             return true;
         }
         switch (item.getItemId()) {
-            case R.id.action_settings:{
+            case R.id.action_camera:{
                 res = actionCamera();
                 break;
             }
-            case R.id.take_photo:{
+            case R.id.action_album:{
 
                 res = actionAlbum();
                 break;
@@ -229,14 +230,125 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         return contentFragment;
     }
 
+
+    private ScreenShotable replaceFragmentPro(ScreenShotable screenShotable, String item, int topPosition) {
+
+        switch (item){
+            case "book": {
+                this.res = R.drawable.content_book;
+                break;
+            }
+            case "building":{
+                this.res = R.drawable.content_building;
+                break;
+
+            }
+            case "movie":{
+                this.res = R.drawable.content_movie;
+                break;
+
+            }
+            case "case":{
+                this.res = R.drawable.content_case;
+                break;
+
+            }
+            case "paint":{
+                this.res = R.drawable.content_paint;
+                break;
+
+            }
+            case "party":{
+                this.res = R.drawable.content_party;
+                break;
+
+            }
+            case "shop":{
+                this.res = R.drawable.content_shop;
+                break;
+
+            }
+            default:{
+                this.res = R.drawable.content_book;
+
+            }
+
+        }
+
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
+        animator.start();
+        ContentFragment contentFragment = ContentFragment.newInstance(this.res);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
+        return contentFragment;
+    }
+
+    /**
+     * 菜单功能方法
+     * @param slideMenuItem
+     * @param screenShotable
+     * @param position
+     * @return
+     */
     @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        ScreenShotable screenShotableres = null;
         switch (slideMenuItem.getName()) {
-            case ContentFragment.CLOSE:
+            case ContentFragment.CLOSE: {
                 return screenShotable;
+            }
+            case ContentFragment.BOOK: {
+                //Toast.makeText(this,"点击了Book..",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this,BookActivity.class);
+                startActivity(intent);
+                //screenShotableres = replaceFragmentPro(screenShotable,"book",position);
+                break;
+            }
+            case ContentFragment.BUILDING:{
+                //Toast.makeText(this,"点击了Building..",Toast.LENGTH_SHORT).show();
+                //screenShotableres = replaceFragmentPro(screenShotable,"building",position);
+                startActivity(new Intent(this,BuildingActivity.class));
+                break;
+            }
+            case ContentFragment.MOVIE:{
+                Toast.makeText(this,"点击了movie..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"movie",position);
+                break;
+            }
+            case ContentFragment.CASE:{
+                Toast.makeText(this,"点击了case..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"case",position);
+
+                break;
+            }
+            case ContentFragment.PAINT:{
+                Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
+
+                break;
+            }
+            case ContentFragment.PARTY:{
+                Toast.makeText(this,"点击了party..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"party",position);
+
+                break;
+            }
+            case ContentFragment.SHOP:{
+                Toast.makeText(this,"点击了shop..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"shop",position);
+
+                break;
+            }
+
             default:
                 return replaceFragment(screenShotable, position);
         }
+        return screenShotableres;
     }
 
     @Override

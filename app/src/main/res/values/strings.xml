@@ -6,5 +6,11 @@
     <string name="album">相册</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="title_activity_book">BookActivity</string>
+    <string name="bt_content_book1">点击一下</string>
+    <string name="title_activity_building">BuildingActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

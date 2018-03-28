@@ -17,17 +17,23 @@
             </intent-filter>
         </activity>
 
-
         <provider
-            android:authorities="com.example.didonglin.testapplication"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.didonglin.testapplication"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
+        <activity
+            android:name=".BookActivity"
+            android:label="@string/title_activity_book"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".BuildingActivity"
+            android:label="@string/title_activity_building"></activity>
     </application>
 
 </manifest>
