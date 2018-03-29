@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dialog_layout" type="id">dialog_layout</item>
+    <item name="btn_take_photo" type="id">take_photo</item>
+    <item name="btn_pick_photo" type="id">pick_photo</item>
+    <item name="btn_cancel" type="id">cancel</item>
+    <item name="selectImage" type="id">selectImage</item>
+    <item name="uploadImage" type="id">uploadImage</item>
+    <item name="imageView" type="id">imageView</item>
+    <item name="uploadImageResult" type="id">uploadRes</item>
+</resources>
