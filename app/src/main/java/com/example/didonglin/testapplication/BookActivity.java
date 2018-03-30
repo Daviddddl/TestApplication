@@ -44,7 +44,6 @@ public class BookActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     String res = submitDataByDoGet();
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + res + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -55,22 +54,24 @@ public class BookActivity extends AppCompatActivity {
 
     public String submitDataByDoGet(/*Map<String, String> map, String path*/) throws Exception {
 
-
         new Thread() {
+
+            String res;
+
             public void run() {
 
                 try {
-        /*// 拼凑出请求地址
-        StringBuilder sb = new StringBuilder(path);
-        sb.append("?");
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            sb.append(entry.getKey()).append("=").append(entry.getValue());
-            sb.append("&");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        String str = sb.toString();
-        System.out.println(str);
-        URL Url = new URL(str);*/
+                    /*// 拼凑出请求地址
+                    StringBuilder sb = new StringBuilder(path);
+                    sb.append("?");
+                    for (Map.Entry<String, String> entry : map.entrySet()) {
+                        sb.append(entry.getKey()).append("=").append(entry.getValue());
+                        sb.append("&");
+                    }
+                    sb.deleteCharAt(sb.length() - 1);
+                    String str = sb.toString();
+                    System.out.println(str);
+                    URL Url = new URL(str);*/
 
                     String urlstr = "https://www.doveminr.com/smartQA/stuoperate/listMyCourse?userid=12";
                     URL url = new URL(urlstr);
@@ -81,33 +82,37 @@ public class BookActivity extends AppCompatActivity {
                     httpConn.setDoInput(true);
                     httpConn.setRequestProperty("Content-type", "application/x-java-serialized-object");
 
-        /*OutputStream outputStream = httpConn.getOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                    /*OutputStream outputStream = httpConn.getOutputStream();
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("121231234");
+                    StringBuffer stringBuffer = new StringBuffer();
+                    stringBuffer.append("121231234");
 
-        objectOutputStream.writeObject(stringBuffer);
+                    objectOutputStream.writeObject(stringBuffer);
 
-        objectOutputStream.flush();
+                    objectOutputStream.flush();
 
-        httpConn.getInputStream();*/
+                    httpConn.getInputStream();*/
 
                     InputStream inputStream = httpConn.getInputStream();
 
-                    StringBuffer stringBuffer = new StringBuffer();
+                    StringBuilder stringBuilder = new StringBuilder();
                     String line;
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    while ((line = reader.readLine()) != null) {
-                        stringBuffer.append(line);
-                    }
+                    while ((line = reader.readLine()) != null)
+                        stringBuilder.append(line);
 
-                    System.out.println(stringBuffer.toString());
+                    System.out.println(stringBuilder.toString());
+                    //执行数据库方法
+
                 } catch (Exception e) {
                     System.out.println("Error!!!");
                 }
             }
         }.start();
-        return null;
+        return "";
     }
+
+
+
 }

@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             }
             case ContentFragment.BOOK: {
                 //Toast.makeText(this,"点击了Book..",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,BookActivity.class);
+                Intent intent = new Intent(this,PicActivity.class);
                 startActivity(intent);
                 //screenShotableres = replaceFragmentPro(screenShotable,"book",position);
                 break;
