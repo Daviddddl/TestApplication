@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.codec.binary.Base64;
+
 
 /**
  * 描述:
@@ -132,5 +134,53 @@ public class FileUtil {
             res.add(str.substring(startindex,endindex));
         }
         return res;
+    }
+
+    //输入图片文件路径，返回图片base64编码字符串
+    public static String getImgStr(String imgFile) {
+        //将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+
+        InputStream in = null;
+        byte[] data = null;
+        //读取图片字节数组
+        try {
+            in = new FileInputStream(imgFile);
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return "";
+        }
+        return new String(Base64.encodeBase64(data));
+    }
+
+    //输入图片base64编码字符串和保存路径，将字符串转为二进制图片存入保存路径
+    public static boolean generateImage(String imgStr,String imgFilePath) {
+
+        if (imgStr == null) //图像数据为空
+            return false;
+
+        try {
+            //Base64解码
+            byte[] b = Base64.decodeBase64(imgStr);
+            for (int i = 0; i < b.length; ++i) {
+                if (b[i] < 0) {//调整异常数据
+                    b[i] += 256;
+                }
+
+                //生成jpeg图片
+
+                OutputStream out = new FileOutputStream(imgFilePath);
+                out.write(b);
+                out.flush();
+                out.close();
+                return true;
+            }
+        }catch(Exception e1){
+            e1.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }

@@ -258,7 +258,7 @@ public class LQRPhotoSelectUtils {
      */
     private String generateImgePath() {
         return getExternalStoragePath() + File.separator + String.valueOf(System.currentTimeMillis()) + ".jpg";
-        //        return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + String.valueOf(System.currentTimeMillis()) + ".jpg";//测试用
+        // return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + String.valueOf(System.currentTimeMillis()) + ".jpg";//测试用
     }
 
 

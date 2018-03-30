@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.didonglin.testapplication.util.DBUtil;
+import com.example.didonglin.testapplication.util.FileUtil;
 import com.example.didonglin.testapplication.util.LQRPhotoSelectUtils;
 
 import java.io.File;
@@ -56,9 +58,20 @@ public class PicActivity extends AppCompatActivity {
             @Override
             public void onFinish(File outputFile, Uri outputUri) {
                 // 4、当拍照或从图库选取图片成功后回调
-                mTvPath.setText(outputFile.getAbsolutePath());
-                mTvUri.setText(outputUri.toString());
+                String absolutePath = outputFile.getAbsolutePath();
+                String tvUri = outputUri.toString();
+                mTvPath.setText(absolutePath);
+                mTvUri.setText(tvUri);
                 Glide.with(PicActivity.this).load(outputUri).into(mIvPic);
+
+                // ---------------向服务器传输------------------
+                // 1. 生成图片的base64码
+                String picBase64 = FileUtil.getImgStr(absolutePath);
+
+                // 2. 上传数据库
+                // DBUtil.DBMonitorSQL("insert into picture()")
+
+
             }
         }, false);//true裁剪，false不裁剪
 
