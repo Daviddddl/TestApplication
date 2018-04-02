@@ -22,6 +22,7 @@ import com.example.didonglin.testapplication.util.FileUtil;
 import com.example.didonglin.testapplication.util.LQRPhotoSelectUtils;
 
 import java.io.File;
+import java.sql.SQLException;
 
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
@@ -56,7 +57,7 @@ public class PicActivity extends AppCompatActivity {
         // 1、创建LQRPhotoSelectUtils（一个Activity对应一个LQRPhotoSelectUtils）
         mLqrPhotoSelectUtils = new LQRPhotoSelectUtils(this, new LQRPhotoSelectUtils.PhotoSelectListener() {
             @Override
-            public void onFinish(File outputFile, Uri outputUri) {
+            public void onFinish(File outputFile, Uri outputUri) throws SQLException {
                 // 4、当拍照或从图库选取图片成功后回调
                 String absolutePath = outputFile.getAbsolutePath();
                 String tvUri = outputUri.toString();
@@ -69,11 +70,21 @@ public class PicActivity extends AppCompatActivity {
                 String picBase64 = FileUtil.getImgStr(absolutePath);
 
                 // 2. 上传数据库
-                // DBUtil.DBMonitorSQL("insert into picture()")
+                String name = "test01";
+                String filePath = "test01Path";
+                String description = "test01desciption";
+                Integer isDeleted = 0;
+
+                String insertSql = "insert into picture(name,base64str,file_path,description,is_deleted) values \"" + name + "\",\"" + picBase64 + "\",\"" + filePath +"\",\"" + description + "\"," + isDeleted;
+                System.out.println(insertSql);
+
+                String insertres = DBUtil.DBMonitorSQL(insertSql,"picture");
+                System.out.println(insertres);
 
 
             }
-        }, false);//true裁剪，false不裁剪
+        }, false);
+        //true裁剪，false不裁剪
 
         //        mLqrPhotoSelectUtils.setAuthorities("com.lqr.lqrnativepicselect.fileprovider");
         //        mLqrPhotoSelectUtils.setImgPath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + String.valueOf(System.currentTimeMillis()) + ".jpg");
@@ -137,7 +148,11 @@ public class PicActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 2、在Activity中的onActivityResult()方法里与LQRPhotoSelectUtils关联
-        mLqrPhotoSelectUtils.attachToActivityForResult(requestCode, resultCode, data);
+        try {
+            mLqrPhotoSelectUtils.attachToActivityForResult(requestCode, resultCode, data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showDialog() {

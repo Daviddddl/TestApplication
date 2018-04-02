@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import java.io.File;
+import java.sql.SQLException;
 
 public class LQRPhotoSelectUtils {
 
@@ -170,7 +171,7 @@ public class LQRPhotoSelectUtils {
         mActivity.startActivityForResult(intent, REQ_ZOOM_PHOTO);
     }
 
-    public void attachToActivityForResult(int requestCode, int resultCode, Intent data) {
+    public void attachToActivityForResult(int requestCode, int resultCode, Intent data) throws SQLException {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case LQRPhotoSelectUtils.REQ_TAKE_PHOTO://拍照
@@ -276,7 +277,7 @@ public class LQRPhotoSelectUtils {
     }
 
     public interface PhotoSelectListener {
-        void onFinish(File outputFile, Uri outputUri);
+        void onFinish(File outputFile, Uri outputUri) throws SQLException;
     }
 }
 

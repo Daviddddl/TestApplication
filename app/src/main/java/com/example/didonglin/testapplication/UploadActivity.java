@@ -53,7 +53,7 @@ public class UploadActivity extends Activity implements View.OnClickListener,Upl
     /***
      * 这里的这个URL是我服务器的javaEE环境URL
      */
-    private static String requestURL = "http://172.31.8.6:8080/fileUpload/file_upload";
+    private static String requestURL = "http://127.0.0.1:8080/fileUpload/file_upload";
     private Button selectButton,uploadButton;
     private ImageView imageView;
     private TextView uploadImageResult;
