@@ -339,16 +339,16 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 break;
             }
             case ContentFragment.PARTY:{
-                Toast.makeText(this,"点击了party..",Toast.LENGTH_SHORT).show();
-                screenShotableres = replaceFragmentPro(screenShotable,"party",position);
-                //startActivity(new Intent(this,PartyActivity.class));
+//                Toast.makeText(this,"点击了party..",Toast.LENGTH_SHORT).show();
+//                screenShotableres = replaceFragmentPro(screenShotable,"party",position);
+                startActivity(new Intent(this,ChatActivity.class));
 
                 break;
             }
             case ContentFragment.SHOP:{
-                Toast.makeText(this,"点击了shop..",Toast.LENGTH_SHORT).show();
-                screenShotableres = replaceFragmentPro(screenShotable,"shop",position);
-                //startActivity(new Intent(this,ConnectActivity.class));
+                //Toast.makeText(this,"点击了shop..",Toast.LENGTH_SHORT).show();
+                //screenShotableres = replaceFragmentPro(screenShotable,"shop",position);
+                startActivity(new Intent(this,LoginActivity.class));
 
 
                 break;
