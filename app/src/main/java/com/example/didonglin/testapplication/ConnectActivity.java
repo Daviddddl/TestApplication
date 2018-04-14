@@ -61,8 +61,8 @@ public class ConnectActivity extends AppCompatActivity implements LoaderManager.
         });
 
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect);
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_connect);
         // Set up the connect form.
         ipAddressView = findViewById(R.id.ip_address);
         populateAutoComplete();
@@ -267,9 +267,10 @@ public class ConnectActivity extends AppCompatActivity implements LoaderManager.
                 }
             }*/
 
-            if(ipAddress.equals("0.0.0.0")&&username.equals("123123")&&password.equals("123123123"))
-                return true;
+            if(ipAddress.equals("0.0.0.0")&&username.equals("123123")&&password.equals("123123123")) {
 
+                return true;
+            }
 
 
 

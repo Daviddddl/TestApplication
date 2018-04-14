@@ -303,10 +303,12 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return screenShotable;
             }
             case ContentFragment.BOOK: {
-                //Toast.makeText(this,"点击了Book..",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,PicActivity.class);
-                startActivity(intent);
-                //screenShotableres = replaceFragmentPro(screenShotable,"book",position);
+                Toast.makeText(this,"点击了Book..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"book",position);
+
+                //Intent intent = new Intent(this,PicActivity.class);
+
+                //startActivity(intent);
                 break;
             }
             case ContentFragment.BUILDING:{
@@ -323,30 +325,30 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 break;
             }
             case ContentFragment.CASE:{
-                //Toast.makeText(this,"点击了case..",Toast.LENGTH_SHORT).show();
-                //screenShotableres = replaceFragmentPro(screenShotable,"case",position);
-                startActivity(new Intent(this,CaseActivity.class));
+                Toast.makeText(this,"点击了case..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"case",position);
+                //startActivity(new Intent(this,CaseActivity.class));
 
                 break;
             }
             case ContentFragment.PAINT:{
-                //Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
-                //screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
-                startActivity(new Intent(this,UploadActivity.class));
+                Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
+                //startActivity(new Intent(this,UploadActivity.class));
 
                 break;
             }
             case ContentFragment.PARTY:{
-                //Toast.makeText(this,"点击了party..",Toast.LENGTH_SHORT).show();
-                //screenShotableres = replaceFragmentPro(screenShotable,"party",position);
-                startActivity(new Intent(this,PartyActivity.class));
+                Toast.makeText(this,"点击了party..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"party",position);
+                //startActivity(new Intent(this,PartyActivity.class));
 
                 break;
             }
             case ContentFragment.SHOP:{
-                //Toast.makeText(this,"点击了shop..",Toast.LENGTH_SHORT).show();
-                //screenShotableres = replaceFragmentPro(screenShotable,"shop",position);
-                startActivity(new Intent(this,ConnectActivity.class));
+                Toast.makeText(this,"点击了shop..",Toast.LENGTH_SHORT).show();
+                screenShotableres = replaceFragmentPro(screenShotable,"shop",position);
+                //startActivity(new Intent(this,ConnectActivity.class));
 
 
                 break;
