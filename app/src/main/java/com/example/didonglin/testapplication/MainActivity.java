@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.BUILDING:{
                 //Toast.makeText(this,"点击了Building..",Toast.LENGTH_SHORT).show();
                 //screenShotableres = replaceFragmentPro(screenShotable,"building",position);
-                startActivity(new Intent(this,SelectPicActivity.class));
+                startActivity(new Intent(this,PicActivity.class));
                 break;
             }
             case ContentFragment.MOVIE:{
@@ -334,7 +334,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.PAINT:{
                 //Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
                 //screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
-                //startActivity(new Intent(this, com.example.didonglin.testapplication.Mychat.MyChatActivity.class));
 
                 break;
             }

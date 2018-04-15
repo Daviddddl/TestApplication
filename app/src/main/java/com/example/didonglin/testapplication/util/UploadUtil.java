@@ -65,7 +65,7 @@ public class UploadUtil {
     protected static final int WHAT_UPLOAD_DONE = 2;
 
     /**
-     * android上传文件到服务器
+     * 上传文件到服务器
      *
      * @param filePath
      *            需要上传的文件的路径
@@ -90,7 +90,7 @@ public class UploadUtil {
     }
 
     /**
-     * android上传文件到服务器
+     * 上传文件到服务器
      *
      * @param file
      *            需要上传的文件
@@ -183,14 +183,18 @@ public class UploadUtil {
             dos.write(params.getBytes());
             /**上传文件*/
             InputStream is = new FileInputStream(file);
-            onUploadProcessListener.initUpload((int)file.length());
+            if(onUploadProcessListener != null){
+                onUploadProcessListener.initUpload((int)file.length());
+            }
             byte[] bytes = new byte[1024];
             int len = 0;
             int curLen = 0;
             while ((len = is.read(bytes)) != -1) {
                 curLen += len;
                 dos.write(bytes, 0, len);
-                onUploadProcessListener.onUploadProcess(curLen);
+                if(onUploadProcessListener!= null) {
+                    onUploadProcessListener.onUploadProcess(curLen);
+                }
             }
             is.close();
 
@@ -243,7 +247,9 @@ public class UploadUtil {
      */
     private void sendMessage(int responseCode,String responseMessage)
     {
-        onUploadProcessListener.onUploadDone(responseCode, responseMessage);
+        if (onUploadProcessListener != null){
+            onUploadProcessListener.onUploadDone(responseCode, responseMessage);
+        }
     }
 
     /**
@@ -252,7 +258,7 @@ public class UploadUtil {
      * @author shimingzheng
      *
      */
-    public static interface OnUploadProcessListener {
+    public interface OnUploadProcessListener {
         /**
          * 上传响应
          * @param responseCode

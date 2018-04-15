@@ -22,11 +22,18 @@ public class DBUtil {
         String driver;
         String password;
         try{
-            prop.load(this.getClass().getClassLoader().getResourceAsStream("jdbc.properties"));
+            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties");
+
+            /*prop.load(this.getClass().getClassLoader().getResourceAsStream(".app.src.main.res.jdbc.properties"));
             driver = prop.getProperty("jdbc.driver");
             url = prop.getProperty("jdbc.url");
             username = prop.getProperty("jdbc.username");
             password = prop.getProperty("jdbc.password");
+            System.out.println(driver + "---" +url + "---" +username + "---" +password);*/
+            driver = "com.mysql.jdbc.Driver";
+            url = "jdbc:mysql://123.206.70.190:3306/turtlebot?useUnicode=true&characterEncoding=utf8";
+            username = "root";
+            password = "753421";
             Class.forName(driver);
             return DriverManager.getConnection(url, username, password);
         }catch(Exception e){

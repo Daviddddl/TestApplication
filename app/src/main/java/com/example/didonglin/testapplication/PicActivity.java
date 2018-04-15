@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.didonglin.testapplication.util.DBUtil;
 import com.example.didonglin.testapplication.util.FileUtil;
 import com.example.didonglin.testapplication.util.LQRPhotoSelectUtils;
+import com.example.didonglin.testapplication.util.UploadUtil;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -61,16 +63,24 @@ public class PicActivity extends AppCompatActivity {
                 // 4、当拍照或从图库选取图片成功后回调
                 String absolutePath = outputFile.getAbsolutePath();
                 String tvUri = outputUri.toString();
+
+                Log.e("filepath",absolutePath);
+                Log.e("uri",tvUri);
+
                 mTvPath.setText(absolutePath);
                 mTvUri.setText(tvUri);
                 Glide.with(PicActivity.this).load(outputUri).into(mIvPic);
 
+                String fileKey = "file";
+                String requestUrl = "http://172.20.8.46:8080/";
+                UploadUtil.getInstance().uploadFile(absolutePath,fileKey,requestUrl,null);
+
                 // ---------------向服务器传输------------------
                 // 1. 生成图片的base64码
-                String picBase64 = FileUtil.getImgStr(absolutePath);
+                //String picBase64 = FileUtil.getImgStr(absolutePath);
 
                 // 2. 上传数据库
-                String name = "test01";
+                /*String name = "test01";
                 String filePath = "test01Path";
                 String description = "test01desciption";
                 Integer isDeleted = 0;
@@ -79,7 +89,7 @@ public class PicActivity extends AppCompatActivity {
                 System.out.println(insertSql);
 
                 String insertres = DBUtil.DBMonitorSQL(insertSql,"picture");
-                System.out.println(insertres);
+                System.out.println(insertres);*/
 
 
             }
