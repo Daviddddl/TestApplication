@@ -32,8 +32,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.didonglin.testapplication.util.SocketClient;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class ChatActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,LoaderCallbacks<Cursor> {
+public class ChatServerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,LoaderCallbacks<Cursor> {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -62,23 +60,22 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
     private UserSendTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mChatForm;
+    private AutoCompleteTextView mChatServerForm;
     private View mProgressView;
-    private View mChatFormView;
+    private View mChatServerFormView;
     private TextView portView;
     private Spinner portSpinner;
     private List<String> list;
     private TextView messageView;
-    private TextView ipView;
     private ArrayAdapter<String> adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_chat_server);
         // Set up the login form.
-        mChatForm = (AutoCompleteTextView) findViewById(R.id.input_message);
+        mChatServerForm = (AutoCompleteTextView) findViewById(R.id.input_message);
         populateAutoComplete();
 
         Button mSendButton = (Button) findViewById(R.id.send_message_button);
@@ -89,24 +86,22 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        mChatFormView = findViewById(R.id.chat_form_view);
-        mProgressView = findViewById(R.id.chat_progress);
+        mChatServerFormView = findViewById(R.id.chatServer_form_view);
+        mProgressView = findViewById(R.id.chatServer_progress);
 
 
-        messageView = findViewById(R.id.chat_message);
-        ipView = findViewById(R.id.input_ip);
-        portView= findViewById(R.id.port);
-        portSpinner= findViewById(R.id.server_port);
-        portView.setText("您连接的端口是");
+        portView=(TextView) findViewById(R.id.port);
+        portSpinner=(Spinner) findViewById(R.id.server_port);
+        portView.setText("您服务器开放的端口是");
 
         /*设置数据源*/
-        list= new ArrayList<>();
+        list=new ArrayList<String>();
         for(int i = 8000; i < 10000; i++)
             list.add(i+"");
 
 
         /*新建适配器*/
-        adapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
+        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
 
         /*adapter设置一个下拉列表样式，参数为系统子布局*/
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -134,7 +129,7 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position,
                                long id) {
         String port=adapter.getItem(position);   //获取选中的那一项
-        portView.setText("您连接的端口是"+port);
+        portView.setText("您服务器开放的端口是"+port);
     }
 
     @Override
@@ -157,7 +152,7 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mChatForm, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mChatServerForm, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -197,14 +192,10 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         // Reset errors.
-        mChatForm.setError(null);
+        mChatServerForm.setError(null);
 
         // Store values at the time of the login attempt.
-        String message = mChatForm.getText().toString();
-        String ip = ipView.getText().toString();
-        Integer port = Integer.getInteger(portView.getText().toString());
-
-        messageView.append("client:" + message + "to " + ip);
+        String message = mChatServerForm.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -213,12 +204,12 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(message)) {
-            mChatForm.setError(getString(R.string.error_field_required));
-            focusView = mChatForm;
+            mChatServerForm.setError(getString(R.string.error_field_required));
+            focusView = mChatServerForm;
             cancel = true;
-        } else if (!isChatValid(message)) {
-            mChatForm.setError(getString(R.string.error_invalid_message));
-            focusView = mChatForm;
+        } else if (!isChatServerValid(message)) {
+            mChatServerForm.setError(getString(R.string.error_invalid_message));
+            focusView = mChatServerForm;
             cancel = true;
         }
 
@@ -229,13 +220,13 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            //showProgress(true);
-            mAuthTask = new UserSendTask(message, ip, port);
+            showProgress(true);
+            mAuthTask = new UserSendTask(message);
             mAuthTask.execute((Void) null);
         }
     }
 
-    private boolean isChatValid(String email) {
+    private boolean isChatServerValid(String email) {
         //TODO: Replace this with your own logic
         return true;
     }
@@ -251,12 +242,12 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mChatFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mChatFormView.animate().setDuration(shortAnimTime).alpha(
+            mChatServerFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mChatServerFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mChatFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mChatServerFormView.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
@@ -272,7 +263,7 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mChatFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mChatServerFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -309,10 +300,10 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
     /*private void addMessageToAutoComplete(List<String> messageCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(ChatActivity.this,
+                new ArrayAdapter<>(ChatServerActivity.this,
                         android.R.layout.simple_dropdown_item_1line, messagesCollection);
 
-        mChatForm.setAdapter(adapter);
+        mChatServerForm.setAdapter(adapter);
     }*/
 
 
@@ -333,20 +324,15 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
     public class UserSendTask extends AsyncTask<Void, Void, Boolean> {
 
         private String mMessage;
-        private String ip;
-        private Integer port;
 
-        UserSendTask(String message, String ip, Integer port) {
-            this.mMessage = message;
-            this.ip = ip;
-            this.port = port;
+        UserSendTask(String message) {
+            mMessage = message;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            new SocketClient().client(ip,port,mMessage);
 
             // TODO: register the new account here.
             return true;

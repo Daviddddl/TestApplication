@@ -17,6 +17,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_message">Message</string>
+    <string name="prompt_ip">IP</string>
 
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
