@@ -72,7 +72,7 @@ public class PicActivity extends AppCompatActivity {
                 Glide.with(PicActivity.this).load(outputUri).into(mIvPic);
 
                 String fileKey = "file";
-                String requestUrl = "http://172.20.8.46:8080/";
+                String requestUrl = "http://172.20.8.46:8080/uploadimage";
                 UploadUtil.getInstance().uploadFile(absolutePath,fileKey,requestUrl,null);
 
                 // ---------------向服务器传输------------------
