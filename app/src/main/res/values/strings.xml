@@ -48,6 +48,7 @@
     <string name="action_connect">connect</string>
     <string name="error_invalid_ipaddress">This ip address is invalid</string>
     <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 
 </resources>

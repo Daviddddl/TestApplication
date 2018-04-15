@@ -332,9 +332,9 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 break;
             }
             case ContentFragment.PAINT:{
-                Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
-                screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
-                //startActivity(new Intent(this,UploadActivity.class));
+                //Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
+                //screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
+                //startActivity(new Intent(this, com.example.didonglin.testapplication.Mychat.MyChatActivity.class));
 
                 break;
             }

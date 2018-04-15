@@ -78,7 +78,18 @@
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat" />
-        <activity android:name=".ChatServerActivity"></activity>
+        <activity android:name=".ChatServerActivity" />
+
+        <activity android:name=".mychat.MyChatMainActivity">
+
+        </activity>
+        <activity android:name=".mychat.SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

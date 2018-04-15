@@ -78,4 +78,9 @@ public class SocketServer {
             System.out.println("Error."+e);
         }
     }
+
+
+    public static void main(String[] args) {
+        new SocketServer().server(8000,"777777");
+    }
 }

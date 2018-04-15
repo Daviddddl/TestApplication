@@ -16,11 +16,12 @@ import java.net.Socket;
  */
 public class SocketClient {
 
-    public void client(String ip, Integer port, String message){
+    public void client(String ip, String port, String message){
         try {
             // 1、创建客户端Socket，指定服务器地址和端口
             // Socket socket=new Socket("127.0.0.1",5200);
-            Socket socket = new Socket(ip, port);
+            int mport = Integer.getInteger(port);
+            Socket socket = new Socket(ip, mport);
             System.out.println("客户端启动成功");
             // 2、获取输出流，向服务器端发送信息
             // 向本机的52000端口发出客户请求
@@ -54,5 +55,10 @@ public class SocketClient {
         } catch (Exception e) {
             System.out.println("can not listen to:" + e);// 出错，打印出错信息
         }
+    }
+
+
+    public static void main(String[] args) {
+        new SocketClient().client("127.0.0.1","12306","66666666666");
     }
 }

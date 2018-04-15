@@ -202,9 +202,9 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
         // Store values at the time of the login attempt.
         String message = mChatForm.getText().toString();
         String ip = ipView.getText().toString();
-        Integer port = Integer.getInteger(portView.getText().toString());
+        String port = portView.getText().toString();
 
-        messageView.append("client:" + message + "to " + ip);
+        messageView.append("client:          " + message + "          to      " + ip  +"\n");
 
         boolean cancel = false;
         View focusView = null;
@@ -334,9 +334,9 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
 
         private String mMessage;
         private String ip;
-        private Integer port;
+        private String port;
 
-        UserSendTask(String message, String ip, Integer port) {
+        UserSendTask(String message, String ip, String port) {
             this.mMessage = message;
             this.ip = ip;
             this.port = port;
@@ -346,6 +346,8 @@ public class ChatActivity extends AppCompatActivity implements AdapterView.OnIte
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            System.out.println("\n\n\n\n\n\n\n\n\n" + ip + port + mMessage);
+            System.out.println("\n\n\n\n\n\n\n\n\n");
             new SocketClient().client(ip,port,mMessage);
 
             // TODO: register the new account here.
