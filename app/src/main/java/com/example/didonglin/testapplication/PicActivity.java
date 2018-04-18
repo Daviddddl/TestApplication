@@ -1,5 +1,14 @@
 package com.example.didonglin.testapplication;
 
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -20,11 +29,23 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.didonglin.testapplication.util.DBUtil;
 import com.example.didonglin.testapplication.util.FileUtil;
+import com.example.didonglin.testapplication.util.FileUtils;
 import com.example.didonglin.testapplication.util.LQRPhotoSelectUtils;
 import com.example.didonglin.testapplication.util.UploadUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.sql.SQLException;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
@@ -34,24 +55,26 @@ public class PicActivity extends AppCompatActivity {
 
     private Button mBtnTakePhoto;
     private Button mBtnSelectPhoto;
+    private Button mBtnGetRes;
     private TextView mTvPath;
     private TextView mTvUri;
     private LQRPhotoSelectUtils mLqrPhotoSelectUtils;
     private ImageView mIvPic;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pic);
-        mBtnTakePhoto = (Button) findViewById(R.id.btnTakePhoto);
-        mBtnSelectPhoto = (Button) findViewById(R.id.btnSelectPhoto);
-        mTvPath = (TextView) findViewById(R.id.tvPath);
-        mTvUri = (TextView) findViewById(R.id.tvUri);
-        mIvPic = (ImageView) findViewById(R.id.ivPic);
+        mBtnTakePhoto = findViewById(R.id.btnTakePhoto);
+        mBtnSelectPhoto = findViewById(R.id.btnSelectPhoto);
+        mBtnGetRes = findViewById(R.id.getResButton);
+        mTvPath = findViewById(R.id.tvPath);
+        mTvUri = findViewById(R.id.tvUri);
+        mIvPic = findViewById(R.id.ivPic);
 
         init();
         initListener();
-
 
     }
 
@@ -72,24 +95,8 @@ public class PicActivity extends AppCompatActivity {
                 Glide.with(PicActivity.this).load(outputUri).into(mIvPic);
 
                 String fileKey = "file";
-                String requestUrl = "http://172.20.8.46:8080/uploadimage";
+                String requestUrl = "http://192.168.20.124:8080/ImageUploadServer_war/uploadimage";
                 UploadUtil.getInstance().uploadFile(absolutePath,fileKey,requestUrl,null);
-
-                // ---------------向服务器传输------------------
-                // 1. 生成图片的base64码
-                //String picBase64 = FileUtil.getImgStr(absolutePath);
-
-                // 2. 上传数据库
-                /*String name = "test01";
-                String filePath = "test01Path";
-                String description = "test01desciption";
-                Integer isDeleted = 0;
-
-                String insertSql = "insert into picture(name,base64str,file_path,description,is_deleted) values \"" + name + "\",\"" + picBase64 + "\",\"" + filePath +"\",\"" + description + "\"," + isDeleted;
-                System.out.println(insertSql);
-
-                String insertres = DBUtil.DBMonitorSQL(insertSql,"picture");
-                System.out.println(insertres);*/
 
 
             }
@@ -123,6 +130,15 @@ public class PicActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE}
                 );
+            }
+        });
+
+        mBtnGetRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 3、下载结果
+                downLoad("http://172.20.8.46:8080/files/images/123.jpg","caffeRes01.jpg");
+                loadImage("caffeRes01.jpg");
             }
         });
     }
@@ -200,5 +216,71 @@ public class PicActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();//显示对话框
     }
+
+
+    //设备API大于6.0时，主动申请权限
+    private void requestPermission(Activity context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+
+            }
+        }
+    }
+
+
+    /**
+     * 从服务器下载文件
+     * @param path 下载文件的地址
+     * @param FileName 文件名字
+     */
+    public static void downLoad(final String path, final String FileName) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(path);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    con.setReadTimeout(5000);
+                    con.setConnectTimeout(5000);
+                    con.setRequestProperty("Charset", "UTF-8");
+                    con.setRequestMethod("GET");
+                    if (con.getResponseCode() == 200) {
+                        InputStream is = con.getInputStream();//获取输入流
+                        FileOutputStream fileOutputStream = null;//文件输出流
+                        if (is != null) {
+                            FileUtils fileUtils = new FileUtils();
+                            fileOutputStream = new FileOutputStream(fileUtils.createFile(FileName));//指定文件保存路径，代码看下一步
+                            byte[] buf = new byte[1024];
+                            int ch;
+                            while ((ch = is.read(buf)) != -1) {
+                                fileOutputStream.write(buf, 0, ch);//将获取到的流写入文件中
+                            }
+                        }
+                        if (fileOutputStream != null) {
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    private void loadImage(String filename) {
+        String path = Environment.getExternalStorageDirectory().toString() + "/caffeRes";
+        try {
+            Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(new File(path, filename)));
+            mIvPic.setImageBitmap(bmp);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
