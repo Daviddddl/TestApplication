@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets{
+        main{
+            jniLibs.srcDir 'libs'
+        }
+    }
 }
 
 repositories {
@@ -32,6 +37,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation files('libs/BaiduLBS_Android.jar')
     compile 'com.github.yalantis:Side-Menu.Android:1.0.1'
     compile 'com.github.ozodrukh:CircularReveal:1.0.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -45,4 +51,5 @@ dependencies {
     implementation files('C:/Users/99700/StudioProjects/TestApplication/gradle/wrapper/commons-codec-1.10.jar')
     implementation files('C:/Users/99700/StudioProjects/TestApplication/gradle/wrapper/commons-codec-1.10.jar')
     implementation files('C:/Users/99700/StudioProjects/TestApplication/gradle/wrapper/gradle-wrapper.jar')
+    implementation files('libs/BaiduLBS_Android.jar')
 }

@@ -334,6 +334,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.PAINT:{
                 //Toast.makeText(this,"点击了paint..",Toast.LENGTH_SHORT).show();
                 //screenShotableres = replaceFragmentPro(screenShotable,"paint",position);
+                startActivity(new Intent(this,MapActivity.class));
+
 
                 break;
             }
