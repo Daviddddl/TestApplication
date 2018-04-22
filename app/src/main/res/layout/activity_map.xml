@@ -34,5 +34,11 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="经纬度位置"/>
+        <Button
+            android:id="@+id/mypoi"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="周围POI"/>
     </LinearLayout>
 </FrameLayout>

@@ -40,6 +40,8 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
     private Button loc;
     private Button latlng;
     private Button desc;
+    private Button mypoi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +57,12 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         loc = findViewById(R.id.loc);
         latlng = findViewById(R.id.latlng);
         desc = findViewById(R.id.desc);
+        mypoi = findViewById(R.id.mypoi);
+
         loc.setOnClickListener(this);
         latlng.setOnClickListener(this);
         desc.setOnClickListener(this);
+        mypoi.setOnClickListener(this);
     }
     class MyLocation implements BDLocationListener{
         @Override
@@ -143,7 +148,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                                     }
                                 };
                                 search.setOnGetGeoCodeResultListener(listener);
-                                search.geocode(new GeoCodeOption().city("哈尔滨").address(descEdit.getText().toString()));
+                                search.geocode(new GeoCodeOption().city("北京").address(descEdit.getText().toString()));
                                 search.destroy();
                             }
                         });
