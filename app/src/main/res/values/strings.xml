@@ -51,4 +51,10 @@
     <string name="title_activity_main2">Main2Activity</string>
 
 
+    <string name="hello_world">Hello world!</string>
+    <string name="history_title">历史记录</string>
+    <string name="about">关于</string>
+    <string name="clear_history">清空</string>
+
+
 </resources>

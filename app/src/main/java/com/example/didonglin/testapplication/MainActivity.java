@@ -325,9 +325,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 break;
             }
             case ContentFragment.CASE:{
-                Toast.makeText(this,"点击了case..",Toast.LENGTH_SHORT).show();
-                screenShotableres = replaceFragmentPro(screenShotable,"case",position);
+                //Toast.makeText(this,"点击了case..",Toast.LENGTH_SHORT).show();
+                //screenShotableres = replaceFragmentPro(screenShotable,"case",position);
                 //startActivity(new Intent(this,CaseActivity.class));
+                startActivity(new Intent(this,CalculateActivity.class));
+
 
                 break;
             }
@@ -342,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.PARTY:{
 //                Toast.makeText(this,"点击了party..",Toast.LENGTH_SHORT).show();
 //                screenShotableres = replaceFragmentPro(screenShotable,"party",position);
-                startActivity(new Intent(this,ChatActivity.class));
+                startActivity(new Intent(this,MyChatActivity.class));
 
                 break;
             }

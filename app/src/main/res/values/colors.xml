@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    <item name="white" type="color">#FFFFFFFF</item>
+    <item name="black" type="color">#000000</item>
+    <item name="orange_text" type="color">#FF7F24</item>
+    <item name="orange_bg" type="color">#FF9933</item>
+    <item name="purple_text" type="color">#8A2BE2</item>
+    <item name="purple_bg" type="color">#8A2BE2</item>
+    <item name="gray_btn" type="color">#F2F2F2</item>
+    <item name="gray_shadow" type="color">#999999</item>
+    <item name="gray_text" type="color">#666666</item>
+
+    <color name="message_right">#17be1a</color>
+    <color name="colorPrimary">#037bff</color>
+    <color name="colorPrimaryDark">#037bff</color>
+    <color name="colorAccent">#303F9F</color>
+
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="textColorLink">#04289e</color>
+    <color name="text_color">#353535</color>
+    <color name="page_back">#ebebeb</color>
+
+    <color name="trans">#00000000</color>
+    <color name="gray">#c9c9c9</color>
+    <color name="white_trans">#99ffffff</color>
+
+
+    <color name="gray_dark">#999999</color>
+    <color name="gray_trans">#44999999</color>
+    <color name="gray_light">#dcdcdc</color>
+
+    <color name="blue">#2196F3</color>
+    <color name="blue_dark">#1565C0</color>
+    <color name="blue_trans">#B41A78C3</color>
+
+    <color name="group_list_gray">#999999</color>
+
+</resources> 

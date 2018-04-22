@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="7wIOtB5oMrb7xw3CXW6UPYhKw20AD7wG"/>
+            android:value="7wIOtB5oMrb7xw3CXW6UPYhKw20AD7wG" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -38,9 +38,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.baidu.location.f"
+        <service
+            android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -84,7 +85,9 @@
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat" />
         <activity android:name=".ChatServerActivity" />
-        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".MapActivity" />
+        <activity android:name=".CalculateActivity" />
+        <activity android:name=".MyChatActivity"></activity>
     </application>
 
 </manifest>

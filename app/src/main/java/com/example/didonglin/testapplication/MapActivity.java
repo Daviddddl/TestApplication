@@ -47,14 +47,14 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         location = new LocationClient(getApplicationContext());
         location.registerLocationListener(new MyLocation());
         setContentView(R.layout.activity_map);
-        mapView = (MapView)findViewById(R.id.map);
+        mapView = findViewById(R.id.map);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         location.start();
 
-        loc = (Button)findViewById(R.id.loc);
-        latlng = (Button)findViewById(R.id.latlng);
-        desc = (Button)findViewById(R.id.desc);
+        loc = findViewById(R.id.loc);
+        latlng = findViewById(R.id.latlng);
+        desc = findViewById(R.id.desc);
         loc.setOnClickListener(this);
         latlng.setOnClickListener(this);
         desc.setOnClickListener(this);
@@ -99,8 +99,8 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 View view = LayoutInflater.from(this).inflate(R.layout.layout_latlng,null);
                 builder.setView(view);
-                final EditText latEdit = (EditText)view.findViewById(R.id.lat_edit);
-                final EditText lngEdit = (EditText)view.findViewById(R.id.lng_edit);
+                final EditText latEdit = view.findViewById(R.id.lat_edit);
+                final EditText lngEdit = view.findViewById(R.id.lng_edit);
                 builder.setCancelable(true)
                         .setPositiveButton("确定",new DialogInterface.OnClickListener(){
                             @Override
@@ -121,7 +121,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                 View view1 = LayoutInflater.from(this).inflate(R.layout.layout_desc,null);
                 builder1.setView(view1);
-                final EditText descEdit = (EditText)view1.findViewById(R.id.desc_edit);
+                final EditText descEdit = view1.findViewById(R.id.desc_edit);
                 builder1.setCancelable(true)
                         .setPositiveButton("确定",new DialogInterface.OnClickListener(){
                             @Override
