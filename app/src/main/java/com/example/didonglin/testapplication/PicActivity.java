@@ -137,7 +137,7 @@ public class PicActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 3、下载结果
-                downLoad("http://172.20.8.46:8080/files/images/123.jpg","caffeRes01.jpg");
+                downLoad("http://172.20.10.203:8080/files/images/3/10/123.jpeg","caffeRes01.jpg");
                 loadImage("caffeRes01.jpg");
             }
         });
