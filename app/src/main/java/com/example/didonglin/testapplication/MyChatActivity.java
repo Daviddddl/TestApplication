@@ -39,9 +39,9 @@ public class MyChatActivity extends AppCompatActivity {
     private TextView portView;
     private TextView bindPortView;
 
-    private String serverIp = "192.168.2.16";
-    private int serverPort = 7777;
-    private int bindPort = 2555;
+    private String serverIp = "192.168.199。216";
+    private int serverPort = 9999;
+    private int bindPort = 9999;
 
     //handler
     private Handler handler;

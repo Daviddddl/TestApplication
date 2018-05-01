@@ -95,7 +95,6 @@
             android:gravity="center"
             android:text="取消"
             android:id="@+id/cancelButton"/>
-        />
     </LinearLayout>
 
 </RelativeLayout>

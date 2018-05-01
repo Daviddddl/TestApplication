@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.didonglin.testapplication"
         minSdkVersion 22
@@ -31,25 +31,26 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:design:27.1.1'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/BaiduLBS_Android.jar')
-    compile 'com.github.yalantis:Side-Menu.Android:1.0.1'
-    compile 'com.github.ozodrukh:CircularReveal:1.0.4'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation 'com.github.yalantis:Side-Menu.Android:1.0.1'
+    implementation 'com.github.ozodrukh:CircularReveal:1.0.4'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.lovedise:permissiongen:0.0.6'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    testCompile 'junit:junit:4.12'
-    implementation files('C:/Users/99700/StudioProjects/TestApplication/gradle/wrapper/commons-codec-1.10.jar')
-    implementation files('C:/Users/99700/StudioProjects/TestApplication/gradle/wrapper/commons-codec-1.10.jar')
-    implementation files('C:/Users/99700/StudioProjects/TestApplication/gradle/wrapper/gradle-wrapper.jar')
+    implementation 'com.lovedise:permissiongen:0.0.6'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    androidTestImplementation 'junit:junit:4.12'
     implementation files('libs/BaiduLBS_Android.jar')
+    //noinspection GradlePath
+    implementation files('/Users/davidddl/StudioProjects/TestApplication/gradle/wrapper/commons-codec-1.10.jar')
+    //noinspection GradlePath
+    implementation files('/Users/davidddl/StudioProjects/TestApplication/gradle/wrapper/gradle-wrapper.jar')
 }
