@@ -148,7 +148,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                                     }
                                 };
                                 search.setOnGetGeoCodeResultListener(listener);
-                                search.geocode(new GeoCodeOption().city("哈尔滨").address(descEdit.getText().toString()));
+                                search.geocode(new GeoCodeOption().city("北京").address(descEdit.getText().toString()));
                                 search.destroy();
                             }
                         });
