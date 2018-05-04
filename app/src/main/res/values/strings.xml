@@ -15,21 +15,11 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
     <string name="prompt_message">Message</string>
     <string name="prompt_ip">IP</string>
 
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_send_message">Send</string>
-
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_message">This message is invalid</string>
-
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -55,6 +45,27 @@
     <string name="history_title">历史记录</string>
     <string name="about">关于</string>
     <string name="clear_history">清空</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="hint_email">邮箱</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_name">姓名</string>
+    <string name="btn_login">登陆</string>
+    <string name="btn_register">注册</string>
+    <string name="btn_link_to_register">没有账号? 立刻注册.</string>
+    <string name="btn_link_to_login">已经注册! 点此登录.</string>
+    <string name="welcome">欢迎</string>
+    <string name="btn_logout">退出</string>
+    <string name="name">全名</string>
+    <string name="title_activity_main">MainActivity</string>
 
 
 </resources>

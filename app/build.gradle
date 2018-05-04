@@ -31,6 +31,7 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:design:27.1.1'
@@ -53,4 +54,7 @@ dependencies {
     implementation files('/Users/davidddl/StudioProjects/TestApplication/gradle/wrapper/commons-codec-1.10.jar')
     //noinspection GradlePath
     implementation files('/Users/davidddl/StudioProjects/TestApplication/gradle/wrapper/gradle-wrapper.jar')
+
+    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.mcxiaoke.volley:library:1.0.19@aar'
 }

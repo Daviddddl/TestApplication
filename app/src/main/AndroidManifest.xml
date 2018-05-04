@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -30,7 +29,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="oBNUY4NENGnFGIzYE33sHS45xGRyDYkM" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".UserDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,9 +60,6 @@
             android:name=".BuildingActivity"
             android:label="@string/title_activity_building" />
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
             android:name=".PartyActivity"
             android:label="@string/title_activity_party"
             android:theme="@style/AppTheme" />
@@ -81,6 +77,13 @@
             android:label="@string/title_activity_select_pic"
             android:theme="@style/AppTheme" />
         <activity android:name=".PicActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="RegistAndLogin" >
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="RegistAndLogin" />
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat" />
