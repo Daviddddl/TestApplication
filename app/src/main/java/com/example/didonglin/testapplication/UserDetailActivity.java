@@ -10,9 +10,6 @@ import android.widget.TextView;
 import com.example.didonglin.testapplication.helper.SQLiteManager;
 import com.example.didonglin.testapplication.helper.SessionManager;
 
-/**
- * Created by shuo on 2015/4/8.
- */
 public class UserDetailActivity extends AppCompatActivity {
     private TextView nameView;
     private TextView emailView;
@@ -25,9 +22,9 @@ public class UserDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_detail);
         sqLiteManager = new SQLiteManager(getApplicationContext());
         sessionManager = new SessionManager(getApplicationContext());
-        nameView = (TextView) findViewById(R.id.nameView);
-        emailView = (TextView) findViewById(R.id.emailView);
-        logoutButton = (Button) findViewById(R.id.logoutButton);
+        nameView = findViewById(R.id.nameView);
+        emailView = findViewById(R.id.emailView);
+        logoutButton = findViewById(R.id.logoutButton);
 
         if (!sessionManager.isLoggedIn()) {
             logoutUser();

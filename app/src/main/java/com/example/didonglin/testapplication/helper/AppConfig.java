@@ -1,9 +1,5 @@
 package com.example.didonglin.testapplication.helper;
 
-/**
- * 应用参数
- * Created by shuo on 2015/4/8.
- */
 public class AppConfig {
     public static String URL_LOGIN_Test = "http://172.20.94.150:8080/LoginServlet";
     public static String URL_REGISTER_Test = "http://172.20.94.150:8080/RegisterServlet";
